@@ -1,2 +1,2 @@
 #Ignore .class files, hopefully you can compile them yourself
-.class
+*.class

@@ -54,19 +54,47 @@ public class PascalsTriangle {
 	private static void printRows(int howManyRows) {
 		calculateRows(howManyRows);				//simply pass on the parameter to the next method
 		
+		pascalsTriangle[howManyRows-1][4]=100880;
+		int maxLengthInLastRowElement = 1;
+		for(int item: pascalsTriangle[howManyRows-1]){
+			if(Integer.toString(item).length() > Integer.toString(maxLengthInLastRowElement).length()){
+				maxLengthInLastRowElement = item;
+			}
+		}
+		int maxLengthInLastRow = Integer.toString(  maxLengthInLastRowElement  ).length();
+		System.out.println("maxLengthInLastRow  " + maxLengthInLastRow);
+		System.out.println("maxLengthInLastRowElement  " + maxLengthInLastRowElement);
+		
 		String m = "";
 		for(int i =0; i < howManyRows; i++){
-			System.out.printf("%90s\n", Arrays.toString(pascalsTriangle[i]));
-			m += Arrays.toString(pascalsTriangle[i]) + "\n";
+			//System.out.printf("%90s\n", Arrays.toString(pascalsTriangle[i]));
 			
 			for(int j=0; j < pascalsTriangle[i].length; j++){
+				int lengthOfCurrent = Integer.toString(  pascalsTriangle[i][j]  ).length();		//length of current thing in array row's cell
 				
-				//System.out.printf("%10d", pascalsTriangle[i][j]);
+				
+				double idealSpacer0 = (maxLengthInLastRow - lengthOfCurrent)/ 2.0;	
+				//System.out.println("idealSpacer0:  " +idealSpacer0);
+				int idealSpacer = 0;
+				if (idealSpacer0 < 1){
+					idealSpacer = (int)(Math.ceil(idealSpacer0) +1);	//add 1 more for extra spacing
+				}
+				else{
+					idealSpacer = (int)(Math.ceil(idealSpacer0) +1);	//add 1 more for extra spacing
+				}
+				
+				//System.out.println("idealSpacer:  " +idealSpacer);
+				String s = " ";		//local for the 2 if statements
+				
+				System.out.print(new String(new char[(int)idealSpacer0]).replace("\0", s));
+
+				System.out.print(pascalsTriangle[i][j]);
+				
+				System.out.print(new String(new char[idealSpacer]).replace("\0", s));
 			}
-			//System.out.println();
+			System.out.println();
 		}
-		//System.out.printf(m);
-		//System.out.println(Arrays.deepToString(pascalsTriangle));
-		//System.out.println(Arrays.deepToString(pascalsTriangle));
+		
+
 	}
 }
