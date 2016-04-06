@@ -65,13 +65,15 @@ public class PascalsTriangle {
 		System.out.println("maxLengthInLastRow  " + maxLengthInLastRow);
 		System.out.println("maxLengthInLastRowElement  " + maxLengthInLastRowElement);
 		
-		String m = "";
+		String[] lines = new String[howManyRows];
+		
 		for(int i =0; i < howManyRows; i++){
 			//System.out.printf("%90s\n", Arrays.toString(pascalsTriangle[i]));
 			
+			String tempRows = "";
+			
 			for(int j=0; j < pascalsTriangle[i].length; j++){
 				int lengthOfCurrent = Integer.toString(  pascalsTriangle[i][j]  ).length();		//length of current thing in array row's cell
-				
 				
 				double idealSpacer0 = (maxLengthInLastRow - lengthOfCurrent)/ 2.0;	
 				//System.out.println("idealSpacer0:  " +idealSpacer0);
@@ -84,17 +86,30 @@ public class PascalsTriangle {
 				}
 				
 				//System.out.println("idealSpacer:  " +idealSpacer);
-				String s = " ";		//local for the 2 if statements
+				String actualApacer = " ";		//local for the 2 if statements
 				
-				System.out.print(new String(new char[(int)idealSpacer0]).replace("\0", s));
-
-				System.out.print(pascalsTriangle[i][j]);
+				//Keep these lines for printing 
+//				System.out.print(new String(new char[(int)idealSpacer0]).replace("\0", actualApacer));
+//				System.out.print(pascalsTriangle[i][j]);
+//				System.out.print(new String(new char[idealSpacer]).replace("\0", actualApacer));
 				
-				System.out.print(new String(new char[idealSpacer]).replace("\0", s));
+				String tempElement = "";
+				tempElement += (new String(new char[(int)idealSpacer0]).replace("\0", actualApacer));
+				tempElement += (pascalsTriangle[i][j]);
+				tempElement += (new String(new char[idealSpacer]).replace("\0", actualApacer));
+				
+				System.out.print(tempElement);		//also works for printing
+				
+				tempRows += tempElement;
 			}
+			lines[i] = tempRows;
 			System.out.println();
 		}
 		
-
+		int lenghOfLastStringLine = lines[howManyRows-1].length();		//counts how many characters in the last line, all 1 string now
+		System.out.println(lenghOfLastStringLine);
+		for(String line: lines){
+			System.out.println(line);
+		}
 	}
 }
