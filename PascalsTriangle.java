@@ -1,19 +1,24 @@
-package week16;
+package week16;		//remove this package (folder) if you don't need it
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This class used a 2d array to calculate & display Pascal's triangle. Don't overload it by calculating 6000 rows or your computer might freeze
+ * @author Noah Patullo
+ */
 public class PascalsTriangle {
-	//private ArrayList<Double> pascalsTriangle = new ArrayList<Double>();
-	private static int[][] pascalsTriangle;
-	private static ArrayList<ArrayList<Double>> listOfLists = new ArrayList<ArrayList<Double>>();
+	private static int[][] pascalsTriangle;		//2d array hold rows of integersfor the triangle
 	
 	public static void main(String[] args){		
-		printRows(10);
+		printRows(10);		//call the method to actually display
 	}
 
-	private static void printRows(int howManyRows) {
-		pascalsTriangle = new int[howManyRows][];
+	/**
+	 * This method does all the hard work to calculate the numbers
+	 * @param howManyRows (needs to know how many rows it should calculate)
+	 */
+	private static void calculateRows(int howManyRows) {
+		pascalsTriangle = new int[howManyRows][];	//initialize how many rows
 		
 		pascalsTriangle[0] = new int[1];
 		pascalsTriangle[0][0]=1;
@@ -35,6 +40,11 @@ public class PascalsTriangle {
 			
 			rowSize++;
 		}
+		
+	}
+	
+	private static void printRows(int howManyRows) {
+		calculateRows(howManyRows);
 		System.out.println(Arrays.deepToString(pascalsTriangle));
 	}
 }
