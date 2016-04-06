@@ -53,6 +53,20 @@ public class PascalsTriangle {
 	 */
 	private static void printRows(int howManyRows) {
 		calculateRows(howManyRows);				//simply pass on the parameter to the next method
-		System.out.println(Arrays.deepToString(pascalsTriangle));
+		
+		String m = "";
+		for(int i =0; i < howManyRows; i++){
+			System.out.printf("%90s\n", Arrays.toString(pascalsTriangle[i]));
+			m += Arrays.toString(pascalsTriangle[i]) + "\n";
+			
+			for(int j=0; j < pascalsTriangle[i].length; j++){
+				
+				//System.out.printf("%10d", pascalsTriangle[i][j]);
+			}
+			//System.out.println();
+		}
+		//System.out.printf(m);
+		//System.out.println(Arrays.deepToString(pascalsTriangle));
+		//System.out.println(Arrays.deepToString(pascalsTriangle));
 	}
 }
