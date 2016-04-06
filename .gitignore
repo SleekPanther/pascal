@@ -1,5 +1,2 @@
-# Object file
-*.o
-
-# Ada Library Information
-*.ali
+#Ignore .class files, hopefully you can compile them yourself
+.class
