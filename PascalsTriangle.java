@@ -10,7 +10,7 @@ public class PascalsTriangle {
 	private static int[][] pascalsTriangle;		//2d array hold rows of integers for the triangle
 	
 	public static void main(String[] args){		
-		printRows(10);		//call the method to actually display
+		printRows(11);		//call the method to actually display
 	}
 
 	/**
@@ -86,11 +86,6 @@ public class PascalsTriangle {
 				//System.out.println("idealSpacer:  " +idealSpacer);
 				String actualSpacer = " ";		//local for the 2 if statements
 				
-				//Keep these lines for printing 
-//				System.out.print(new String(new char[(int)idealSpacer0]).replace("\0", actualApacer));
-//				System.out.print(pascalsTriangle[i][j]);
-//				System.out.print(new String(new char[idealSpacer]).replace("\0", actualApacer));
-				
 				String tempElement = "";
 				tempElement += (new String(new char[(int)idealSpacer0]).replace("\0", actualSpacer));
 				tempElement += (pascalsTriangle[i][j]);
@@ -110,12 +105,11 @@ public class PascalsTriangle {
 		for(String line: lines){
 			double idealSpacer0 = (lenghOfLastStringLine - line.length()) / 2.0;
 			
-			String actualSpacer = "-";
+			String actualSpacer = "-";		//string spacer on either end of the lines
 			
 			System.out.print(new String(new char[(int)idealSpacer0]).replace("\0", actualSpacer));
 			System.out.print(line);
 			System.out.print(new String(new char[(int)idealSpacer0]).replace("\0", actualSpacer));
-			
 			
 			System.out.println();
 		}
