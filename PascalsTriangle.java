@@ -54,7 +54,7 @@ public class PascalsTriangle {
 	private static void printRows(int howManyRows) {
 		calculateRows(howManyRows);				//simply pass on the parameter to the next method
 		
-		pascalsTriangle[howManyRows-1][4]=100880;
+		//pascalsTriangle[howManyRows-1][4]=100880;
 		int maxLengthInLastRowElement = 1;
 		for(int item: pascalsTriangle[howManyRows-1]){
 			if(Integer.toString(item).length() > Integer.toString(maxLengthInLastRowElement).length()){
@@ -67,9 +67,7 @@ public class PascalsTriangle {
 		
 		String[] lines = new String[howManyRows];
 		
-		for(int i =0; i < howManyRows; i++){
-			//System.out.printf("%90s\n", Arrays.toString(pascalsTriangle[i]));
-			
+		for(int i =0; i < howManyRows; i++){			
 			String tempRows = "";
 			
 			for(int j=0; j < pascalsTriangle[i].length; j++){
@@ -86,7 +84,7 @@ public class PascalsTriangle {
 				}
 				
 				//System.out.println("idealSpacer:  " +idealSpacer);
-				String actualApacer = " ";		//local for the 2 if statements
+				String actualSpacer = " ";		//local for the 2 if statements
 				
 				//Keep these lines for printing 
 //				System.out.print(new String(new char[(int)idealSpacer0]).replace("\0", actualApacer));
@@ -94,9 +92,9 @@ public class PascalsTriangle {
 //				System.out.print(new String(new char[idealSpacer]).replace("\0", actualApacer));
 				
 				String tempElement = "";
-				tempElement += (new String(new char[(int)idealSpacer0]).replace("\0", actualApacer));
+				tempElement += (new String(new char[(int)idealSpacer0]).replace("\0", actualSpacer));
 				tempElement += (pascalsTriangle[i][j]);
-				tempElement += (new String(new char[idealSpacer]).replace("\0", actualApacer));
+				tempElement += (new String(new char[idealSpacer]).replace("\0", actualSpacer));
 				
 				System.out.print(tempElement);		//also works for printing
 				
@@ -107,9 +105,19 @@ public class PascalsTriangle {
 		}
 		
 		int lenghOfLastStringLine = lines[howManyRows-1].length();		//counts how many characters in the last line, all 1 string now
-		System.out.println(lenghOfLastStringLine);
+		System.out.println("lenghOfLastStringLine" + lenghOfLastStringLine);
+		
 		for(String line: lines){
-			System.out.println(line);
+			double idealSpacer0 = (lenghOfLastStringLine - line.length()) / 2.0;
+			
+			String actualSpacer = "-";
+			
+			System.out.print(new String(new char[(int)idealSpacer0]).replace("\0", actualSpacer));
+			System.out.print(line);
+			System.out.print(new String(new char[(int)idealSpacer0]).replace("\0", actualSpacer));
+			
+			
+			System.out.println();
 		}
 	}
 }
