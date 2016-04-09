@@ -60,8 +60,6 @@ public class PascalsTriangle {
 			}
 		}
 		int maxLengthInLastRow = Integer.toString(  maxLengthInLastRowElement  ).length();		//this is how many digits to longest number is
-		System.out.println("maxLengthInLastRowElement  " + maxLengthInLastRowElement);
-		System.out.println("maxLengthInLastRow  " + maxLengthInLastRow + "\n");
 		
 		String[] lines = new String[howManyRows];		//this string array will hold all the values in the triangle, but 1 line at a time (for centering later)
 		
@@ -71,44 +69,38 @@ public class PascalsTriangle {
 			for(int j=0; j < pascalsTriangle[i].length; j++){	//loop through elements in each row
 				int lengthOfCurrent = Integer.toString(  pascalsTriangle[i][j]  ).length();		//length of current thing in array row's cell
 				
-				double idealSpacer0 = (maxLengthInLastRow - lengthOfCurrent)/ 2.0;	
-				//System.out.println("idealSpacer0:  " +idealSpacer0);
-				int idealSpacer = (int)(Math.ceil(idealSpacer0) +2);
-//				if (idealSpacer0 < 1){
-//					idealSpacer = (int)(Math.ceil(idealSpacer0) +1);	//add 1 more for extra spacing
-//				}
-//				else{
-//					idealSpacer = (int)(Math.ceil(idealSpacer0) +1);	//add 1 more for extra spacing
-//				}
+				double idealSpacer0 = (maxLengthInLastRow - lengthOfCurrent)/ 2.0;	//calculate the space on either side: Current element length from largest element length (this is ALL extra space) then divide by 2 to get what needs to be added on each side
+				int idealSpacer = (int)(Math.ceil(idealSpacer0) +2);	//must be an int for the char repetition to work so round it & cast to int, & add 2 so even the largest element gets some space on each side
+				//ideal spacer is now a number of times to repeat some chacater to get padding on each side
 				
-				//System.out.println("idealSpacer:  " +idealSpacer);
 				String actualSpacer = " ";		//local for the 2 if statements. This is the "space" on either side of the number. Could be any character, but space is best here
 				
-				String tempElement = "";
-				tempElement += (new String(new char[(int)idealSpacer0]).replace("\0", actualSpacer));
-				tempElement += (pascalsTriangle[i][j]);
+				String tempElement = "";	//this holds the value of a left spacer, the actual number & the right spacer. It's added to the row after each iteration of this innermost loop
+				tempElement += (new String(new char[(int)idealSpacer0]).replace("\0", actualSpacer));	//this basically says repeat a character n times, n being the spacer & the character being actualSpacer
+				tempElement += (pascalsTriangle[i][j]);		//add the actual number in between spacers
 				tempElement += (new String(new char[idealSpacer]).replace("\0", actualSpacer));
 				
-				System.out.print(tempElement);		//comment out when not printing by individual elements (only helpful for testing)
+				//System.out.print(tempElement);		//comment out when not printing by individual elements (only helpful for testing)
 				
 				tempRow += tempElement;
 			}
 			lines[i] = tempRow;
-			System.out.println();		//comment out when not printing by individual elements
+			//System.out.println();		//comment out when not printing by individual elements
 		}
 		
-		
+		//Now we have each row as 1 giant string (spacers on either side of number included), so print each row in a similar manner
 		int lenghOfLastStringLine = lines[howManyRows-1].length();		//counts how many characters in the last line, all 1 string now
 		
+		System.out.println("Pascal's Triangle");
 		for(int i = 0; i < lines.length; i++){		//this prints out the actual data & used only 1 spacer
 			String line = lines[i];		//temporary string to hold the current line
-			double idealSpacer = (lenghOfLastStringLine - line.length()) / 2.0;		//calculate spacer: legth of the last line (the longest) minus length of the current line, divided by 2
+			int idealSpacer = (int)( (lenghOfLastStringLine - line.length()) / 2.0) ;		//calculate spacer: legth of the last line (the longest) minus length of the current line, divided by 2
 			
 			String actualSpacer = "-";		//string spacer on either end of the lines
 			
-			System.out.print(new String(new char[ (int)idealSpacer ] ).replace("\0", actualSpacer));		//print the left spacer
+			System.out.print(new String(new char[idealSpacer]).replace("\0", actualSpacer));		//print the left spacer
 			System.out.print(line);		//print the actual number
-			System.out.print(new String(new char[ (int)idealSpacer ] ).replace("\0", actualSpacer) + " Row " + i);		//print the right spacer followed by the row number
+			System.out.print(new String(new char[idealSpacer]).replace("\0", actualSpacer) + " Row " + i);		//print the right spacer followed by the row number
 			
 			System.out.println();	//print a new line after the spacer's are done
 		}
