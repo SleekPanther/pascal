@@ -7,7 +7,7 @@ import java.util.Scanner;
  * @author Noah Patullo
  */
 public class PascalsTriangle {
-	private static int[][] pascalsTriangle;		//2d array hold rows of integers for the triangle
+	private static long[][] pascalsTriangle;		//2d array hold rows of integers for the triangle
 	
 	public static void main(String[] args){
 		int howMany = 2;	//a user-set variable for how many rows to print
@@ -40,20 +40,20 @@ public class PascalsTriangle {
 	 * @param howManyRows (needs to know how many rows it should calculate)
 	 */
 	private static void calculateRows(int howManyRows) {
-		pascalsTriangle = new int[howManyRows][];	//initialize how many rows
+		pascalsTriangle = new long[howManyRows][];	//initialize how many rows
 		
 		//The 1st 2 rows are hard coded so the rest have somewhere to start
-		pascalsTriangle[0] = new int[1];	//first row (only holds 1 element)
+		pascalsTriangle[0] = new long[1];	//first row (only holds 1 element)
 		pascalsTriangle[0][0]=1;			//set the value to 1
 		
-		pascalsTriangle[1] = new int[2];	//the second row contains [1,1], so it's initialized with length 2
+		pascalsTriangle[1] = new long[2];	//the second row contains [1,1], so it's initialized with length 2
 		pascalsTriangle[1][0]=1;
 		pascalsTriangle[1][1]=1;
 		
 		
 		int rowSize = 3;		//this counter increased the row size for each iteration (starting @ 3 since the 1st 2 rows are hard coded)
 		for(int row = 2; row < howManyRows; row++){		//start @ row index 2, go until reached "howManyRows", & increment by 1
-			pascalsTriangle[row] = new int[rowSize];	//create a rows based on the current size. Starts @ 3, then 4, 5, 6 ...
+			pascalsTriangle[row] = new long[rowSize];	//create a rows based on the current size. Starts @ 3, then 4, 5, 6 ...
 			pascalsTriangle[row][0] = 1;		//set the 0th element in the row to 1 (a rule of pascal's triangle) 
 			
 			for(int col = 1; col < rowSize-1; col++){	//start at 1 to skip the 0th element, "< rowSize-1" really goes until 2 less than rowSize. 1 less so that the last element is filled in as a 1 & the other "1 less" is because arrays start indexes @ 0  
@@ -73,13 +73,13 @@ public class PascalsTriangle {
 	private static void printRows(int howManyRows) {
 		calculateRows(howManyRows);				//this calls another method which populates the array with the correct numbers
 		
-		int maxLengthInLastRowElement = 1;		//this holds the actual element with the greatest numerical value. Initialized to 1
-		for(int item: pascalsTriangle[howManyRows-1]){		//find the largest element by comparing string length of the integers (temporarily casts to string) 
-			if(Integer.toString(item).length() > Integer.toString(maxLengthInLastRowElement).length()){
+		long maxLengthInLastRowElement = 1;		//this holds the actual element with the greatest numerical value. Initialized to 1
+		for(long item: pascalsTriangle[howManyRows-1]){		//find the largest element by comparing string length of the integers (temporarily casts to string) 
+			if(Long.toString(item).length() > Long.toString(maxLengthInLastRowElement).length()){
 				maxLengthInLastRowElement = item;
 			}
 		}
-		int maxLengthInLastRow = Integer.toString(  maxLengthInLastRowElement  ).length();		//this is how many digits to longest number is
+		long maxLengthInLastRow = Long.toString(  maxLengthInLastRowElement  ).length();		//this is how many digits to longest number is
 		
 		String[] lines = new String[howManyRows];		//this string array will hold all the values in the triangle, but 1 line at a time (for centering later)
 		
@@ -87,7 +87,7 @@ public class PascalsTriangle {
 			String tempRow = "";	//this holds the contents of each row each iteration & is added to the string array "lines" before tempRow is destroyed
 			
 			for(int j=0; j < pascalsTriangle[i].length; j++){	//loop through elements in each row
-				int lengthOfCurrent = Integer.toString(  pascalsTriangle[i][j]  ).length();		//length of current thing in array row's cell
+				int lengthOfCurrent = Long.toString(  pascalsTriangle[i][j]  ).length();		//length of current thing in array row's cell
 				
 				double idealSpacer0 = (maxLengthInLastRow - lengthOfCurrent)/ 2.0;	//calculate the space on either side: Current element length from largest element length (this is ALL extra space) then divide by 2 to get what needs to be added on each side
 				int idealSpacer = (int)(Math.ceil(idealSpacer0) +2);	//must be an int for the char repetition to work so round it & cast to int, & add 2 so even the largest element gets some space on each side
