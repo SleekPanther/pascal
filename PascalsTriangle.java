@@ -10,15 +10,19 @@ public class PascalsTriangle {
 	private static int[][] pascalsTriangle;		//2d array hold rows of integers for the triangle
 	
 	public static void main(String[] args){
-		int howMany = 0;
+		int howMany = 2;	//a user-set variable for how many rows to print
 		Scanner input = new Scanner(System.in);
 		
-		boolean gotIt = false;
-		while(gotIt == false){
-			try{
-				System.out.print("How many rows of Pascal's Triangle? ");
+		boolean gotIt = false;		//error checking so user can only enter a number
+		while(gotIt == false){		//loop iterates as long they still have it wrong
+			try{	//attempt to do what's right
+				System.out.print("How many rows of Pascal's Triangle to print? ");
 				howMany =input.nextInt();
-				gotIt = true;
+				while(howMany < 2){		//assuming they entered a number, check to make sure it's greater than 1 (so @ least 2 rows print)
+					System.out.print("Error! Number of rows must be greater than 1: ");
+					howMany =input.nextInt();
+				}
+				gotIt = true;		//change status to true so the outer loop terminates
 			}
 			catch(InputMismatchException ex){
 				System.out.println("ERROR! Must enter an number (no decimals or words)");
