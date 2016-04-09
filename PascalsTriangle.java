@@ -1,7 +1,5 @@
 package week16;		//remove this package (folder) if you don't need it
 
-import java.util.Arrays;
-
 /**
  * This class used a 2d array to calculate & display Pascal's triangle. Don't overload it by calculating 6000 rows or your computer might freeze
  * @author Noah Patullo
@@ -10,7 +8,7 @@ public class PascalsTriangle {
 	private static int[][] pascalsTriangle;		//2d array hold rows of integers for the triangle
 	
 	public static void main(String[] args){		
-		printRows(11);		//call the method to actually display
+		printRows(12);		//call the method to actually display
 	}
 
 	/**
@@ -100,18 +98,18 @@ public class PascalsTriangle {
 		}
 		
 		int lenghOfLastStringLine = lines[howManyRows-1].length();		//counts how many characters in the last line, all 1 string now
-		System.out.println("lenghOfLastStringLine" + lenghOfLastStringLine);
 		
-		for(String line: lines){
-			double idealSpacer0 = (lenghOfLastStringLine - line.length()) / 2.0;
+		for(int i = 0; i < lines.length; i++){		//this prints out the actual data & used only 1 spacer
+			String line = lines[i];		//temporary string to hold the current line
+			double idealSpacer = (lenghOfLastStringLine - line.length()) / 2.0;		//calculate spacer: legth of the last line (the longest) minus length of the current line, divided by 2
 			
 			String actualSpacer = "-";		//string spacer on either end of the lines
 			
-			System.out.print(new String(new char[(int)idealSpacer0]).replace("\0", actualSpacer));
-			System.out.print(line);
-			System.out.print(new String(new char[(int)idealSpacer0]).replace("\0", actualSpacer));
+			System.out.print(new String(new char[ (int)idealSpacer ] ).replace("\0", actualSpacer));		//print the left spacer
+			System.out.print(line);		//print the actual number
+			System.out.print(new String(new char[ (int)idealSpacer ] ).replace("\0", actualSpacer) + " Row " + i);		//print the right spacer followed by the row number
 			
-			System.out.println();
+			System.out.println();	//print a new line after the spacer's are done
 		}
 	}
 }
