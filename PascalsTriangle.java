@@ -8,7 +8,7 @@ public class PascalsTriangle {
 	private static int[][] pascalsTriangle;		//2d array hold rows of integers for the triangle
 	
 	public static void main(String[] args){		
-		printRows(12);		//call the method to actually display
+		printRows(10);		//call the method to actually display
 	}
 
 	/**
@@ -50,52 +50,53 @@ public class PascalsTriangle {
 	 * @param howManyRows
 	 */
 	private static void printRows(int howManyRows) {
-		calculateRows(howManyRows);				//simply pass on the parameter to the next method
+		calculateRows(howManyRows);				//this calls another method which populates the array with the correct numbers
 		
-		//pascalsTriangle[howManyRows-1][4]=100880;
-		int maxLengthInLastRowElement = 1;
-		for(int item: pascalsTriangle[howManyRows-1]){
+		pascalsTriangle[howManyRows-1][4]=100880;
+		int maxLengthInLastRowElement = 1;		//this holds the actual element with the greatest numerical value. Initialized to 1
+		for(int item: pascalsTriangle[howManyRows-1]){		//find the largest element by comparing string length of the integers (temporarily casts to string) 
 			if(Integer.toString(item).length() > Integer.toString(maxLengthInLastRowElement).length()){
 				maxLengthInLastRowElement = item;
 			}
 		}
-		int maxLengthInLastRow = Integer.toString(  maxLengthInLastRowElement  ).length();
-		System.out.println("maxLengthInLastRow  " + maxLengthInLastRow);
+		int maxLengthInLastRow = Integer.toString(  maxLengthInLastRowElement  ).length();		//this is how many digits to longest number is
 		System.out.println("maxLengthInLastRowElement  " + maxLengthInLastRowElement);
+		System.out.println("maxLengthInLastRow  " + maxLengthInLastRow + "\n");
 		
-		String[] lines = new String[howManyRows];
+		String[] lines = new String[howManyRows];		//this string array will hold all the values in the triangle, but 1 line at a time (for centering later)
 		
-		for(int i =0; i < howManyRows; i++){			
-			String tempRows = "";
+		for(int i =0; i < howManyRows; i++){			//loop through each row in the array, calculate a spacer so each number gets extra space on each side & add to string array
+			String tempRow = "";	//this holds the contents of each row each iteration & is added to the string array "lines" before tempRow is destroyed
 			
-			for(int j=0; j < pascalsTriangle[i].length; j++){
+			for(int j=0; j < pascalsTriangle[i].length; j++){	//loop through elements in each row
 				int lengthOfCurrent = Integer.toString(  pascalsTriangle[i][j]  ).length();		//length of current thing in array row's cell
 				
 				double idealSpacer0 = (maxLengthInLastRow - lengthOfCurrent)/ 2.0;	
 				//System.out.println("idealSpacer0:  " +idealSpacer0);
-				int idealSpacer = 0;
-				if (idealSpacer0 < 1){
-					idealSpacer = (int)(Math.ceil(idealSpacer0) +1);	//add 1 more for extra spacing
-				}
-				else{
-					idealSpacer = (int)(Math.ceil(idealSpacer0) +1);	//add 1 more for extra spacing
-				}
+				int idealSpacer = (int)(Math.ceil(idealSpacer0) +2);
+//				if (idealSpacer0 < 1){
+//					idealSpacer = (int)(Math.ceil(idealSpacer0) +1);	//add 1 more for extra spacing
+//				}
+//				else{
+//					idealSpacer = (int)(Math.ceil(idealSpacer0) +1);	//add 1 more for extra spacing
+//				}
 				
 				//System.out.println("idealSpacer:  " +idealSpacer);
-				String actualSpacer = " ";		//local for the 2 if statements
+				String actualSpacer = " ";		//local for the 2 if statements. This is the "space" on either side of the number. Could be any character, but space is best here
 				
 				String tempElement = "";
 				tempElement += (new String(new char[(int)idealSpacer0]).replace("\0", actualSpacer));
 				tempElement += (pascalsTriangle[i][j]);
 				tempElement += (new String(new char[idealSpacer]).replace("\0", actualSpacer));
 				
-				System.out.print(tempElement);		//also works for printing
+				System.out.print(tempElement);		//comment out when not printing by individual elements (only helpful for testing)
 				
-				tempRows += tempElement;
+				tempRow += tempElement;
 			}
-			lines[i] = tempRows;
-			System.out.println();
+			lines[i] = tempRow;
+			System.out.println();		//comment out when not printing by individual elements
 		}
+		
 		
 		int lenghOfLastStringLine = lines[howManyRows-1].length();		//counts how many characters in the last line, all 1 string now
 		
