@@ -1,5 +1,7 @@
 package week16;		//remove this package (folder) if you don't need it
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
 /**
  * This class used a 2d array to calculate & display Pascal's triangle. Don't overload it by calculating 6000 rows or your computer might freeze
  * @author Noah Patullo
@@ -7,8 +9,23 @@ package week16;		//remove this package (folder) if you don't need it
 public class PascalsTriangle {
 	private static int[][] pascalsTriangle;		//2d array hold rows of integers for the triangle
 	
-	public static void main(String[] args){		
-		printRows(10);		//call the method to actually display
+	public static void main(String[] args){
+		int howMany = 0;
+		Scanner input = new Scanner(System.in);
+		
+		boolean gotIt = false;
+		while(gotIt == false){
+			try{
+				System.out.print("How many rows of Pascal's Triangle? ");
+				howMany =input.nextInt();
+				gotIt = true;
+			}
+			catch(InputMismatchException ex){
+				System.out.println("ERROR! Must enter an number (no decimals or words)");
+				input.nextLine();		//java must clear the input buffer
+			}
+		}
+		printRows(howMany);		//call the method to actually display
 	}
 
 	/**
@@ -52,7 +69,6 @@ public class PascalsTriangle {
 	private static void printRows(int howManyRows) {
 		calculateRows(howManyRows);				//this calls another method which populates the array with the correct numbers
 		
-		pascalsTriangle[howManyRows-1][4]=100880;
 		int maxLengthInLastRowElement = 1;		//this holds the actual element with the greatest numerical value. Initialized to 1
 		for(int item: pascalsTriangle[howManyRows-1]){		//find the largest element by comparing string length of the integers (temporarily casts to string) 
 			if(Integer.toString(item).length() > Integer.toString(maxLengthInLastRowElement).length()){
